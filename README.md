@@ -20,5 +20,5 @@ for index, file_path in enumerate(files_paths):
     sub_strings = trans_subs(subs_event, src_lang='en',target_lang='Zh-CN') #src_lang为原文本的语言，target_lang为要翻译成的语言
     save_subs(save_paths[index], sub_strings)
     print(f'{file_path}\n translation done')
-print('all translation were down')
+print('all translation were done')
 ```
