@@ -63,13 +63,13 @@ def trans_subs(sub_event, src_lang='en',target_lang='Zh-CN'):
                                 #返回字幕格式的字符串
 
 #save the translated subtitle file
-#保存字幕
+#保存翻译好的字幕文件
 def save_subs(save_path, sub_string):
     modified_subs = sub2.SSAFile.from_string(sub_string)
     modified_subs.save(save_path)
 
 #get the sub files paths
-#保存翻译好的字幕文件
+#获取文件路径
 def get_path(file_path):
 
     """ 
