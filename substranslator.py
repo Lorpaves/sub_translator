@@ -119,4 +119,4 @@ if __name__ == '__main__':
         sub_strings = trans_subs(subs_event, src_lang='en',target_lang='Zh-CN')
         save_subs(save_paths[index], sub_strings)
         print(f'{file_path}\n translation done')
-    print('all translation were done')
+    print('all translations were done')
