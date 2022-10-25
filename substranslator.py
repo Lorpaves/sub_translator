@@ -109,8 +109,8 @@ def get_path(file_path, source_exten:str):
     files_path = []
     files_name = []
     for index, root in enumerate(roots_copy):
-        files_path.extend(root + '\\' + file for file in files_copy[index] if 'srt' in file)
-        files_name.extend(root + '\\' + file.replace(source_exten,'.ass') for file in files_copy[index] if 'srt' in file) #保存字幕文件为ass格式文件，避免出现信息丢失。
+        files_path.extend(root + '\\' + file for file in files_copy[index] if source_exten in file)
+        files_name.extend(root + '\\' + file.replace(source_exten,'.ass') for file in files_copy[index] if source_exten in file) #保存字幕文件为ass格式文件，避免出现信息丢失。
     return files_path, files_name
 
 
