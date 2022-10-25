@@ -47,7 +47,7 @@ def get_translated_content(sub_event, src_lang='en',target_lang='Zh-CN'):
     translated_content = []
     for line in sub_content:
         translated_text = ts.google(query_text=line,from_language=src_lang,to_language=target_lang)
-        time.sleep(1)   #避免频繁请求出现ssl错误。
+        time.sleep(1)   #避免频繁请求出现ssl错误。 如果出现ssl请求错误，调整这里的访问延迟
         print(translated_text)
         translated_content.append(translated_text)
     return [line for line in translated_content if line]
@@ -70,12 +70,18 @@ def save_subs(save_path, sub_string):
 
 #get the sub files paths
 #获取文件路径
-def get_path(file_path):
+def get_path(file_path, source_exten:str):
+    
+    '''
+    目前只测试过翻译srt格式的字幕文件，翻译后保存的格式为ass
 
+    '''
     """ 
     parameter:
         file_path: 
-            main directory contains all subtitle files
+            main directory contains all subtitle files  字幕文件所在的文件夹的绝对路径
+        source_exten:
+            source file extension   字幕文件的拓展名：比如.srt/.ass/。。。
     
     return: 
         tuple: (files_path, files_name)
@@ -104,14 +110,15 @@ def get_path(file_path):
     files_name = []
     for index, root in enumerate(roots_copy):
         files_path.extend(root + '\\' + file for file in files_copy[index] if 'srt' in file)
-        files_name.extend(root + '\\' + file.replace('en.srt','CN.ass') for file in files_copy[index] if 'srt' in file) #保存字幕文件为ass格式文件，避免出现信息丢失。
+        files_name.extend(root + '\\' + file.replace(source_exten,'.ass') for file in files_copy[index] if 'srt' in file) #保存字幕文件为ass格式文件，避免出现信息丢失。
     return files_path, files_name
 
 
 if __name__ == '__main__':
     #需要修改的参数： [path] [sub_string](src_lang, target_lang)
-    path = '[directory of subtitle files]'    #字幕文件所在文件夹的绝对路径
-    files_paths, save_paths = get_path(path)
+    path = 'path to subtitle files => directory'    #字幕文件所在文件夹的绝对路径
+    files_paths, save_paths = get_path(path,source_exten='.srt')    #source_exten: 文件拓展名 
+    
     for index, file_path in enumerate(files_paths):
         subs_event = sub2.load(file_path)
 
