@@ -29,7 +29,7 @@ class SubTranslator:
         self.__if_ignore_limit_of_length = kwargs.get(
             'if_ignore_limit_of_length', True)
         self.__if_use_cn_host = kwargs.get('if_use_cn_host', True)
-        self.__server = kwargs.get('translate_server', 'alibaba')
+        self.__server = kwargs.get('server', 'alibaba')
 
     def __get_sub(self, path):
         """_summary_
