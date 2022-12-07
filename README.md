@@ -1,7 +1,7 @@
-# sub_translator
-简单的字幕翻译工具
+# 字幕翻译工具
 
-# 安装
+### 安装
+
 ```shell
 git clone https://github.com/Lorpaves/sub_translator.git
 
@@ -10,15 +10,34 @@ cd sub_translator
 pip install -r requirements.txt
 
 ```
-# 使用示例
-打开substranslator.py文件，修改参数
+
+### 使用示例
+
 ```python
-path = 'path_to_subtitle_files'    #字幕文件所在文件夹的绝对路径
-files_paths, save_paths = get_path(path)
-for index, file_path in enumerate(files_paths):
-    subs_event = sub2.load(file_path)
-    sub_strings = trans_subs(subs_event, src_lang='en',target_lang='Zh-CN') #src_lang为原文本的语言，target_lang为要翻译成的语言
-    save_subs(save_paths[index], sub_strings)
-    print(f'{file_path}\n translation done')
-print('all translations were done')
+import pysubs2 as pysub
+import translators.server as tss
+import SubTranslator
+
+sub_ts = SubTranslator.SubTranslator(pysub=pysub, tss=tss)
+sub_ts.translate_sub('./test.srt', './save.srt',
+                     from_language='en', to_language='zh')
+
+```
+
+### 参数说明
+
+```python
+SubTranslator
+
+if_duration (bool: Default False) if need to set translate duration, set this to True
+duration (int) duration
+if_ignore_empty_query (bool: Default True) if the text was empty, set True to ignore the text, else will throw error
+if_ignore_limit_of_length (bool: Default True)  Default limited length is 1500, set to True to ignore the error
+if_use_cn_host (bool: Default True)  use cn host or not
+server (str: Default "alibaba") the server that send request to translate the text
+
+SubTranslator.translate_sub
+
+from_language (str): original language
+to_language (str): target language to translate
 ```
