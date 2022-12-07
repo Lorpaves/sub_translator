@@ -28,7 +28,7 @@ sub_ts.translate_sub(path='./test.srt', file_name = './save.srt',
 
 ```python
 SubTranslator
-if_duration (bool: Default False) if need to set translate duration, set this to True
+if_duration (bool: Default False) # if need to set translate duration, set this to True
 duration (int) # duration
 if_ignore_empty_query (bool: Default True) # if the text was empty, set True to ignore the text, else will throw error
 if_ignore_limit_of_length (bool: Default True)  # Default limited length is 1500, set to True to ignore the error
