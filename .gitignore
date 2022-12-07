@@ -1,0 +1,6 @@
+__pycache__/
+Pipfile
+Pipfile.lock
+*.srt
+*.prettierignore
+*.ipynb

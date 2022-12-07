@@ -1,0 +1,2 @@
+pysubs2==1.6.0
+translators==5.5.3
