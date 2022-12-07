@@ -4,3 +4,4 @@ Pipfile.lock
 *.srt
 *.prettierignore
 *.ipynb
+cli.py

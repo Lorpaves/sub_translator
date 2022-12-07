@@ -1,11 +1,10 @@
-import pysubs2
-import translators.server
+
 import time
 
 
 class SubTranslator:
 
-    def __init__(self, pysub: pysubs2, tss: translators.server, **kwargs) -> None:
+    def __init__(self, pysub, tss, **kwargs) -> None:
         """_summary_
 
         Args:
@@ -42,7 +41,7 @@ class SubTranslator:
         """
         return self.__pysub.load(path)
 
-    def __translate_alibaba(self, sub_event: pysubs2.SSAEvent, from_language: str, to_language: str):
+    def __translate_alibaba(self, sub_event, from_language: str, to_language: str):
         """_summary_
 
         Args:
@@ -71,7 +70,7 @@ class SubTranslator:
 
         return sub_event
 
-    def __translate_google(self, sub_event: pysubs2.SSAEvent, from_language: str, to_language: str):
+    def __translate_google(self, sub_event, from_language: str, to_language: str):
         """_summary_
 
         Args:
@@ -100,7 +99,7 @@ class SubTranslator:
 
         return sub_event
 
-    def __translate_yandex(self, sub_event: pysubs2.SSAEvent, from_language: str, to_language: str):
+    def __translate_yandex(self, sub_event, from_language: str, to_language: str):
         """_summary_
 
         Args:
@@ -128,7 +127,7 @@ class SubTranslator:
                 index=index, total=total_lines))
         return sub_event
 
-    def __translate_argos(self, sub_event: pysubs2.SSAEvent, from_language: str, to_language: str):
+    def __translate_argos(self, sub_event, from_language: str, to_language: str):
         """_summary_
 
         Args:
@@ -156,7 +155,7 @@ class SubTranslator:
                 index=index, total=total_lines))
         return sub_event
 
-    def __translate_bing(self, sub_event: pysubs2.SSAEvent, from_language: str, to_language: str):
+    def __translate_bing(self, sub_event, from_language: str, to_language: str):
         """_summary_
 
         Args:
@@ -184,7 +183,7 @@ class SubTranslator:
                 index=index, total=total_lines))
         return sub_event
 
-    def __translate_caiyun(self, sub_event: pysubs2.SSAEvent, from_language: str, to_language: str):
+    def __translate_caiyun(self, sub_event, from_language: str, to_language: str):
         """_summary_
 
         Args:
@@ -212,7 +211,7 @@ class SubTranslator:
                 index=index, total=total_lines))
         return sub_event
 
-    def __translate_lingvanex(self, sub_event: pysubs2.SSAEvent, from_language: str, to_language: str):
+    def __translate_lingvanex(self, sub_event, from_language: str, to_language: str):
         """_summary_
 
         Args:
@@ -240,7 +239,7 @@ class SubTranslator:
                 index=index, total=total_lines))
         return sub_event
 
-    def __translate_argos(self, sub_event: pysubs2.SSAEvent, from_language: str, to_language: str):
+    def __translate_argos(self, sub_event, from_language: str, to_language: str):
         """_summary_
 
         Args:
@@ -269,7 +268,7 @@ class SubTranslator:
                 index=index, total=total_lines))
         return sub_event
 
-    def __translate_baidu(self, sub_event: pysubs2.SSAEvent, from_language: str, to_language: str):
+    def __translate_baidu(self, sub_event, from_language: str, to_language: str):
         """_summary_
 
         Args:
@@ -298,7 +297,7 @@ class SubTranslator:
                 index=index, total=total_lines))
         return sub_event
 
-    def __write_sub(self, sub_event: pysubs2.SSAEvent, file_name: str):
+    def __write_sub(self, sub_event, file_name: str):
         """_summary_
 
         Args:
@@ -306,7 +305,7 @@ class SubTranslator:
             file_name (str): the name used to save the translated subtitle file
         """
         sub_event.save(file_name)
-        print('\033[4;32m File Saved as {name}\033[0m'.format(name=file_name))
+        print('\033[4;32m File Saved at {name}\033[0m'.format(name=file_name))
 
     def translate_sub(self, path: str, file_name: str, from_language: str = 'en', to_language: str = 'zh'):
         """_summary_
