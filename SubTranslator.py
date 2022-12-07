@@ -41,270 +41,263 @@ class SubTranslator:
         """
         return self.__pysub.load(path)
 
-    def __translate_alibaba(self, sub_event, from_language: str, to_language: str):
+    def __format_sub(self, sub_event):
+        sub_string = self.__pysub.SSAFile.to_string(sub_event, 'srt')
+        single_events = sub_string.split('\n\n')
+        length = 0
+        grouped_strings = []
+        event = ''
+        for single_event in single_events:
+            length += len(single_event)
+            event += single_event + '\n\n'
+            if length > 1000:
+                grouped_strings.append(event)
+                length = 0
+                event = single_event + '\n'
+        return grouped_strings
+
+    def __translate_alibaba(self, grouped_strings, from_language: str, to_language: str):
         """_summary_
 
         Args:
-            sub_event (pysubs2.SSAEvent): pysubs2 object
+            grouped_strings (str): grouped sub string
             from_language (str): original language
             to_language (str): target language to translate
 
         Returns:
-            sub_event: translated sub object
+            sub_event: translated sub string stored in an array
         """
-        total_lines = len(sub_event)
-        for index, line in enumerate(sub_event):
+        total = len(grouped_strings)
+        translated_subs = []
+        for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            temp = line.text
-            translated_line = self.__tss.alibaba(query_text=line.text,
+            translated_string = self.__tss.alibaba(query_text=single_string,
                                                  from_language=from_language, to_language=to_language,
                                                  if_ignore_empty_query=self.__if_ignore_empty_query,
                                                  if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
                                                  if_use_cn_host=self.__if_use_cn_host)
-            line.text = translated_line
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_line}\033[0m'.format(
-                origin_line=temp, translated_line=line.text))
+            translated_subs.append(translated_string)
+            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+                origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
-                index=index, total=total_lines))
+                index=index + 1, total=total))
 
-        return sub_event
+        return translated_subs
 
-    def __translate_google(self, sub_event, from_language: str, to_language: str):
+    def __translate_google(self, grouped_strings, from_language: str, to_language: str):
         """_summary_
 
         Args:
-            sub_event (pysubs2.SSAEvent): pysubs2 object
+            grouped_strings (str): grouped sub string
             from_language (str): original language
             to_language (str): target language to translate
 
         Returns:
-            sub_event: translated sub object
+            sub_event: translated sub string stored in an array
         """
-        total_lines = len(sub_event)
-        for index, line in enumerate(sub_event):
+        total = len(grouped_strings)
+        translated_subs = []
+        for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            temp = line.text
-            translated_line = self.__tss.google(query_text=line.text,
-                                                from_language=from_language, to_language=to_language,
-                                                if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                if_use_cn_host=self.__if_use_cn_host)
-            line.text = translated_line
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_line}\033[0m'.format(
-                origin_line=temp, translated_line=line.text))
+            translated_string = self.__tss.google(query_text=single_string,
+                                                 from_language=from_language, to_language=to_language,
+                                                 if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                 if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                 if_use_cn_host=self.__if_use_cn_host)
+            translated_subs.append(translated_string)
+            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+                origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
-                index=index, total=total_lines))
+                index=index + 1, total=total))
 
-        return sub_event
+        return translated_subs
 
-    def __translate_yandex(self, sub_event, from_language: str, to_language: str):
+    def __translate_yandex(self, grouped_strings, from_language: str, to_language: str):
         """_summary_
 
         Args:
-            sub_event (pysubs2.SSAEvent): pysubs2 object
+            grouped_strings (str): grouped sub string
             from_language (str): original language
             to_language (str): target language to translate
 
         Returns:
-            sub_event: translated sub object
+            sub_event: translated sub string stored in an array
         """
-        total_lines = len(sub_event)
-        for index, line in enumerate(sub_event):
+        total = len(grouped_strings)
+        translated_subs = []
+        for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            temp = line.text
-            translated_line = self.__tss.yandex(query_text=line.text,
-                                                from_language=from_language, to_language=to_language,
-                                                if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                if_use_cn_host=self.__if_use_cn_host)
-            line.text = translated_line
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_line}\033[0m'.format(
-                origin_line=temp, translated_line=line.text))
+            translated_string = self.__tss.yandex(query_text=single_string,
+                                                 from_language=from_language, to_language=to_language,
+                                                 if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                 if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                 if_use_cn_host=self.__if_use_cn_host)
+            translated_subs.append(translated_string)
+            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+                origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
-                index=index, total=total_lines))
-        return sub_event
+                index=index + 1, total=total))
 
-    def __translate_argos(self, sub_event, from_language: str, to_language: str):
+        return translated_subs
+
+    def __translate_argos(self, grouped_strings, from_language: str, to_language: str):
         """_summary_
 
         Args:
-            sub_event (pysubs2.SSAEvent): pysubs2 object
+            grouped_strings (str): grouped sub string
             from_language (str): original language
             to_language (str): target language to translate
 
         Returns:
-            sub_event: translated sub object
+            sub_event: translated sub string stored in an array
         """
-        total_lines = len(sub_event)
-        for index, line in enumerate(sub_event):
+        total = len(grouped_strings)
+        translated_subs = []
+        for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            temp = line.text
-            translated_line = self.__tss.argos(query_text=line.text,
-                                               from_language=from_language, to_language=to_language,
-                                               if_ignore_empty_query=self.__if_ignore_empty_query,
-                                               if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                               if_use_cn_host=self.__if_use_cn_host)
-            line.text = translated_line
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_line}\033[0m'.format(
-                origin_line=temp, translated_line=line.text))
+            translated_string = self.__tss.argos(query_text=single_string,
+                                                 from_language=from_language, to_language=to_language,
+                                                 if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                 if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                 if_use_cn_host=self.__if_use_cn_host)
+            translated_subs.append(translated_string)
+            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+                origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
-                index=index, total=total_lines))
-        return sub_event
+                index=index + 1, total=total))
 
-    def __translate_bing(self, sub_event, from_language: str, to_language: str):
+        return translated_subs
+
+    def __translate_bing(self, grouped_strings, from_language: str, to_language: str):
         """_summary_
 
         Args:
-            sub_event (pysubs2.SSAEvent): pysubs2 object
+            grouped_strings (str): grouped sub string
             from_language (str): original language
             to_language (str): target language to translate
 
         Returns:
-            sub_event: translated sub object
+            sub_event: translated sub string stored in an array
         """
-        total_lines = len(sub_event)
-        for index, line in enumerate(sub_event):
+        total = len(grouped_strings)
+        translated_subs = []
+        for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            temp = line.text
-            translated_line = self.__tss.bing(query_text=line.text,
-                                              from_language=from_language, to_language=to_language,
-                                              if_ignore_empty_query=self.__if_ignore_empty_query,
-                                              if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                              if_use_cn_host=self.__if_use_cn_host)
-            line.text = translated_line
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_line}\033[0m'.format(
-                origin_line=temp, translated_line=line.text))
+            translated_string = self.__tss.bing(query_text=single_string,
+                                                 from_language=from_language, to_language=to_language,
+                                                 if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                 if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                 if_use_cn_host=self.__if_use_cn_host)
+            translated_subs.append(translated_string)
+            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+                origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
-                index=index, total=total_lines))
-        return sub_event
+                index=index + 1, total=total))
 
-    def __translate_caiyun(self, sub_event, from_language: str, to_language: str):
+        return translated_subs
+
+    def __translate_caiyun(self, grouped_strings, from_language: str, to_language: str):
         """_summary_
 
         Args:
-            sub_event (pysubs2.SSAEvent): pysubs2 object
+            grouped_strings (str): grouped sub string
             from_language (str): original language
             to_language (str): target language to translate
 
         Returns:
-            sub_event: translated sub object
+            sub_event: translated sub string stored in an array
         """
-        total_lines = len(sub_event)
-        for index, line in enumerate(sub_event):
+        total = len(grouped_strings)
+        translated_subs = []
+        for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            temp = line.text
-            translated_line = self.__tss.caiyun(query_text=line.text,
-                                                from_language=from_language, to_language=to_language,
-                                                if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                if_use_cn_host=self.__if_use_cn_host)
-            line.text = translated_line
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_line}\033[0m'.format(
-                origin_line=temp, translated_line=line.text))
+            translated_string = self.__tss.caiyun(query_text=single_string,
+                                                 from_language=from_language, to_language=to_language,
+                                                 if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                 if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                 if_use_cn_host=self.__if_use_cn_host)
+            translated_subs.append(translated_string)
+            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+                origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
-                index=index, total=total_lines))
-        return sub_event
+                index=index + 1, total=total))
 
-    def __translate_lingvanex(self, sub_event, from_language: str, to_language: str):
+        return translated_subs
+
+    def __translate_lingvanex(self, grouped_strings, from_language: str, to_language: str):
         """_summary_
 
         Args:
-            sub_event (pysubs2.SSAEvent): pysubs2 object
+            grouped_strings (str): grouped sub string
             from_language (str): original language
             to_language (str): target language to translate
 
         Returns:
-            sub_event: translated sub object
+            sub_event: translated sub string stored in an array
         """
-        total_lines = len(sub_event)
-        for index, line in enumerate(sub_event):
+        total = len(grouped_strings)
+        translated_subs = []
+        for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            temp = line.text
-            translated_line = self.__tss.lingvanex(query_text=line.text,
-                                                   from_language=from_language, to_language=to_language,
-                                                   if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                   if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                   if_use_cn_host=self.__if_use_cn_host)
-            line.text = translated_line
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_line}\033[0m'.format(
-                origin_line=temp, translated_line=line.text))
+            translated_string = self.__tss.lingvanex(query_text=single_string,
+                                                 from_language=from_language, to_language=to_language,
+                                                 if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                 if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                 if_use_cn_host=self.__if_use_cn_host)
+            translated_subs.append(translated_string)
+            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+                origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
-                index=index, total=total_lines))
-        return sub_event
+                index=index + 1, total=total))
 
-    def __translate_argos(self, sub_event, from_language: str, to_language: str):
+        return translated_subs
+
+    def __translate_baidu(self, grouped_strings, from_language: str, to_language: str):
         """_summary_
 
         Args:
-            sub_event (pysubs2.SSAEvent): pysubs2 object
+            grouped_strings (str): grouped sub string
             from_language (str): original language
             to_language (str): target language to translate
 
         Returns:
-            sub_event: translated sub object
+            sub_event: translated sub string stored in an array
         """
-
-        total_lines = len(sub_event)
-        for index, line in enumerate(sub_event):
+        total = len(grouped_strings)
+        translated_subs = []
+        for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            temp = line.text
-            translated_line = self.__tss.argos(query_text=line.text,
-                                               from_language=from_language, to_language=to_language,
-                                               if_ignore_empty_query=self.__if_ignore_empty_query,
-                                               if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                               if_use_cn_host=self.__if_use_cn_host)
-            line.text = translated_line
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_line}\033[0m'.format(
-                origin_line=temp, translated_line=line.text))
+            translated_string = self.__tss.baidu(query_text=single_string,
+                                                 from_language=from_language, to_language=to_language,
+                                                 if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                 if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                 if_use_cn_host=self.__if_use_cn_host)
+            translated_subs.append(translated_string)
+            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+                origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
-                index=index, total=total_lines))
-        return sub_event
+                index=index + 1, total=total))
 
-    def __translate_baidu(self, sub_event, from_language: str, to_language: str):
+        return translated_subs
+
+    def __write_sub(self, sub_string, file_name: str):
         """_summary_
 
         Args:
-            sub_event (pysubs2.SSAEvent): pysubs2 object
-            from_language (str): original language
-            to_language (str): target language to translate
-
-        Returns:
-            sub_event: translated sub object
-        """
-
-        total_lines = len(sub_event)
-        for index, line in enumerate(sub_event):
-            if (self.__if_duration):
-                time.sleep(self.__duration)
-            temp = line.text
-            translated_line = self.__tss.baidu(query_text=line.text,
-                                               from_language=from_language, to_language=to_language,
-                                               if_ignore_empty_query=self.__if_ignore_empty_query,
-                                               if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                               if_use_cn_host=self.__if_use_cn_host)
-            line.text = translated_line
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_line}\033[0m'.format(
-                origin_line=temp, translated_line=line.text))
-            print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
-                index=index, total=total_lines))
-        return sub_event
-
-    def __write_sub(self, sub_event, file_name: str):
-        """_summary_
-
-        Args:
-            sub_event (pysubs2.SSAEvent): pysubs2 object
+            sub_string (str): string of the sub
             file_name (str): the name used to save the translated subtitle file
         """
-        sub_event.save(file_name)
+        sub_string = ''.join(sub_string).replace('-> ', ' --> ').replace('：',':')
+        sub = self.__pysub.SSAFile.from_string(sub_string, 'srt')
+        sub.save(file_name)
         print('\033[4;32m File Saved at {name}\033[0m'.format(name=file_name))
 
     def translate_sub(self, path: str, file_name: str, from_language: str = 'en', to_language: str = 'zh'):
@@ -318,43 +311,51 @@ class SubTranslator:
         """
         if self.__server == 'alibaba':
             sub_event = self.__get_sub(path=path)
+            grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_alibaba(
-                sub_event=sub_event, from_language=from_language, to_language=to_language)
-            self.__write_sub(sub_event=translated_sub, file_name=file_name)
+                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+            self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'google':
             sub_event = self.__get_sub(path=path)
+            grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_google(
-                sub_event=sub_event, from_language=from_language, to_language=to_language)
-            self.__write_sub(sub_event=translated_sub, file_name=file_name)
+                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+            self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'yandex':
             sub_event = self.__get_sub(path=path)
+            grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_yandex(
-                sub_event=sub_event, from_language=from_language, to_language=to_language)
-            self.__write_sub(sub_event=translated_sub, file_name=file_name)
+                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+            self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'bing':
             sub_event = self.__get_sub(path=path)
+            grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_bing(
-                sub_event=sub_event, from_language=from_language, to_language=to_language)
-            self.__write_sub(sub_event=translated_sub, file_name=file_name)
+                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+            self.__write_sub(sub_string=translated_sub, file_name=file_name)
 
         elif self.__server == 'baidu':
             sub_event = self.__get_sub(path=path)
+            grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_baidu(
-                sub_event=sub_event, from_language=from_language, to_language=to_language)
-            self.__write_sub(sub_event=translated_sub, file_name=file_name)
+                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+            self.__write_sub(sub_string=translated_sub, file_name=file_name)
 
         elif self.__server == 'caiyun':
             sub_event = self.__get_sub(path=path)
+            grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_caiyun(
-                sub_event=sub_event, from_language=from_language, to_language=to_language)
-            self.__write_sub(sub_event=translated_sub, file_name=file_name)
+                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+            self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'lingvanex':
             sub_event = self.__get_sub(path=path)
+            grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_lingvanex(
-                sub_event=sub_event, from_language=from_language, to_language=to_language)
-            self.__write_sub(sub_event=translated_sub, file_name=file_name)
+                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+            self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'argos':
             sub_event = self.__get_sub(path=path)
+            grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_argos(
-                sub_event=sub_event, from_language=from_language, to_language=to_language)
-            self.__write_sub(sub_event=translated_sub, file_name=file_name)
+                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+            self.__write_sub(sub_string=translated_sub, file_name=file_name)

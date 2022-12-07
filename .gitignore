@@ -5,3 +5,4 @@ Pipfile.lock
 *.prettierignore
 *.ipynb
 cli.py
+.ipynb_checkpoints/
