@@ -53,7 +53,7 @@ class SubTranslator:
             if length > 1000:
                 grouped_strings.append(event)
                 length = 0
-                event = single_event + '\n'
+                event = single_event + '\n\n'
         return grouped_strings
 
     def __translate_alibaba(self, grouped_strings, from_language: str, to_language: str):
@@ -78,7 +78,7 @@ class SubTranslator:
                                                  if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
                                                  if_use_cn_host=self.__if_use_cn_host)
             translated_subs.append(translated_string)
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+            print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
                 index=index + 1, total=total))
@@ -107,7 +107,7 @@ class SubTranslator:
                                                  if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
                                                  if_use_cn_host=self.__if_use_cn_host)
             translated_subs.append(translated_string)
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+            print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
                 index=index + 1, total=total))
@@ -136,7 +136,7 @@ class SubTranslator:
                                                  if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
                                                  if_use_cn_host=self.__if_use_cn_host)
             translated_subs.append(translated_string)
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+            print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
                 index=index + 1, total=total))
@@ -165,7 +165,7 @@ class SubTranslator:
                                                  if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
                                                  if_use_cn_host=self.__if_use_cn_host)
             translated_subs.append(translated_string)
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+            print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
                 index=index + 1, total=total))
@@ -174,7 +174,7 @@ class SubTranslator:
 
     def __translate_bing(self, grouped_strings, from_language: str, to_language: str):
         """_summary_
-
+w
         Args:
             grouped_strings (str): grouped sub string
             from_language (str): original language
@@ -194,7 +194,7 @@ class SubTranslator:
                                                  if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
                                                  if_use_cn_host=self.__if_use_cn_host)
             translated_subs.append(translated_string)
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+            print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
                 index=index + 1, total=total))
@@ -223,7 +223,7 @@ class SubTranslator:
                                                  if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
                                                  if_use_cn_host=self.__if_use_cn_host)
             translated_subs.append(translated_string)
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+            print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
                 index=index + 1, total=total))
@@ -252,7 +252,7 @@ class SubTranslator:
                                                  if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
                                                  if_use_cn_host=self.__if_use_cn_host)
             translated_subs.append(translated_string)
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+            print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
                 index=index + 1, total=total))
@@ -281,7 +281,7 @@ class SubTranslator:
                                                  if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
                                                  if_use_cn_host=self.__if_use_cn_host)
             translated_subs.append(translated_string)
-            print('\033[0;31m{origin_line}\033[0m => \033[0;32m{translated_string}\033[0m'.format(
+            print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
             print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
                 index=index + 1, total=total))
@@ -295,7 +295,8 @@ class SubTranslator:
             sub_string (str): string of the sub
             file_name (str): the name used to save the translated subtitle file
         """
-        sub_string = ''.join(sub_string).replace('-> ', ' --> ').replace('：',':')
+        
+        sub_string = ''.join(sub_string).replace('-> ', ' --> ').replace('：',':').replace('-&gt;', ' -->').replace('，',',')
         sub = self.__pysub.SSAFile.from_string(sub_string, 'srt')
         sub.save(file_name)
         print('\033[4;32m File Saved at {name}\033[0m'.format(name=file_name))
