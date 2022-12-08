@@ -61,9 +61,7 @@ to_language (str): # target language to translate
 options:
   -h, --help            show this help message and exit
   -i INPUT FILE [INPUT FILE ...], --input INPUT FILE [INPUT FILE ...]
-                         the server that send request to translate the text
-  -o OUTPUT DIRECTORY, --output OUTPUT DIRECTORY
-                         the server that send request to translate the text
+                         original file, ex: file1 file2
 
  advanced options :
    advanced options of the translation
