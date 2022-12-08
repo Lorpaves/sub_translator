@@ -11,7 +11,20 @@ pip install -r requirements.txt
 
 ```
 
-### 使用示例
+### 说明
+
+支持的字幕格式: SubRip (SRT), MicroDVD(microdvd), WebVTT formats(vtt),Advanced SubStation Alpha v4.0+(ass),SubStation Alpha v4.0(ssa)
+
+Support extension: SubRip (SRT), MicroDVD(microdvd), WebVTT formats(vtt),Advanced SubStation Alpha v4.0+(ass),SubStation Alpha v4.0(ssa)
+
+字幕会以 SubRip 的格式储存
+The translated file will saved as SRT formats
+
+支持的翻译服务：Google, Alibaba, Yandex, Microsoft(Bing), Kingsoft(Iciba), Sogou, Lingvanex, Itranslate, Caiyun, Argos, Baidu, Tencent
+
+Available Server: Google, Alibaba, Yandex, Microsoft(Bing), Kingsoft(Iciba), Sogou, Lingvanex, Itranslate, Caiyun, Argos, Baidu, Tencent
+
+### Python 使用示例
 
 ```python
 import pysubs2 as pysub
@@ -24,7 +37,7 @@ sub_ts.translate_sub(path='./test.srt', file_name = './save.srt',
 
 ```
 
-### 参数说明
+### Python 引用参数说明
 
 ```python
 SubTranslator
@@ -78,3 +91,16 @@ options:
   -D INPUT DIRECTORY [INPUT DIRECTORY ...], --directory INPUT DIRECTORY [INPUT DIRECTORY ...]
 
 ```
+
+### 感谢
+
+- pysubs2: https://pypi.org/project/pysubs2/
+  pysubs2 is a Python library for editing subtitle files.
+  It's based on SubStation Alpha,the native format of Aegisub;
+  it also supports
+
+- translator: https://pypi.org/project/translators/
+  Translators is a library which aims to bring free, multiple, enjoyable translation to individuals
+  and students in Python. It based on the translation interface of Google, Yandex, Microsoft(Bing),
+  Baidu, Alibaba, Tencent, NetEase(Youdao), Sogou, Kingsoft(Iciba), Iflytek, Niutrans, Lingvanex,
+  Naver(Papago), Deepl, Reverso, Itranslate, Caiyun, TranslateCom, Mglip, Utibet, Argos, etc.
