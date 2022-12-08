@@ -26,11 +26,9 @@ class Wrapper:
         self.__wrapper()
 
     def __parser(self):
-
         self.argv_parser.add_argument('-i', '--input', dest='input file',
-                                      action='store', type=str, nargs='+', help='\033[0;32m the server that send request to translate the text \033[0m', default=None)
-        self.argv_parser.add_argument('-o', '--output', dest='output directory',
-                                      action='store', help='\033[0;32m the server that send request to translate the text \033[0m', default=None)
+                                      action='store', type=str, nargs='+', help='\033[0;32m original file, ex: file1 file2 \033[0m', default=None)
+
         self.argv_group_two.add_argument('-D', '--directory', dest='input directory',
                                          action='store', nargs='+', help='\033[0;32m the server that send request to translate the text \033[0m', default=None)
 
