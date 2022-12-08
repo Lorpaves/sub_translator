@@ -92,7 +92,15 @@ options:
 
 ```
 
-### 感谢
+### 命令行工具使用实例
+
+![ex1](./assets/ex1.gif)
+
+![ex2](./assets/ex2.gif)
+
+![ex3](./assets/ex3.gif)
+
+### 特别感谢
 
 - pysubs2: https://pypi.org/project/pysubs2/
 
