@@ -1,16 +1,5 @@
 # 字幕翻译工具
 
-### 安装
-
-```shell
-git clone https://github.com/Lorpaves/sub_translator.git
-
-cd sub_translator
-
-pip install -r requirements.txt
-
-```
-
 ### 说明
 
 支持的字幕格式: SubRip (SRT), MicroDVD(microdvd), WebVTT formats(vtt),Advanced SubStation Alpha v4.0+(ass),SubStation Alpha v4.0(ssa)
@@ -69,6 +58,17 @@ options:
 
 ### Python 使用示例
 
+#### 安装
+
+```shell
+git clone https://github.com/Lorpaves/sub_translator.git
+
+cd sub_translator
+
+pip install -r requirements.txt
+
+```
+
 ```python
 import pysubs2 as pysub
 import translators.server as tss
@@ -80,7 +80,7 @@ sub_ts.translate_sub(path='./test.srt', file_name = './save.srt',
 
 ```
 
-### Python 引用参数说明
+#### Python 引用参数说明
 
 ```python
 SubTranslator
