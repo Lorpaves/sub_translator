@@ -18,7 +18,7 @@ pip install -r requirements.txt
 Support extension: SubRip (SRT), MicroDVD(microdvd), WebVTT formats(vtt),Advanced SubStation Alpha v4.0+(ass),SubStation Alpha v4.0(ssa)
 
 字幕会以 SubRip 的格式储存
-The translated file will saved as SRT formats
+The translated file will be saved as SRT formats
 
 支持的翻译服务：Google, Alibaba, Yandex, Microsoft(Bing), Kingsoft(Iciba), Sogou, Lingvanex, Itranslate, Caiyun, Argos, Baidu, Tencent
 
