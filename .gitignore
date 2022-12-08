@@ -2,7 +2,10 @@ __pycache__/
 Pipfile
 Pipfile.lock
 *.srt
+*.ass
 *.prettierignore
 *.ipynb
 cli.py
 .ipynb_checkpoints/
+build/
+sub-ts.spec

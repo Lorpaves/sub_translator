@@ -41,3 +41,40 @@ file_name (str): # the name used to save the translated subtitle file
 from_language (str): # original language
 to_language (str): # target language to translate
 ```
+
+### 命令行参数说明
+
+```shell
+options:
+  -h, --help            show this help message and exit
+  -i INPUT FILE [INPUT FILE ...], --input INPUT FILE [INPUT FILE ...]
+                         the server that send request to translate the text
+  -o OUTPUT DIRECTORY, --output OUTPUT DIRECTORY
+                         the server that send request to translate the text
+
+ advanced options :
+   advanced options of the translation
+
+  -s SERVER, --server SERVER
+                         the server that send request to translate the text. Defaults to "alibaba"
+  -f FROM LANGUAGE, --from-language FROM LANGUAGE
+                         original language. Defaults to "en".
+  -t TO LANGUAGE, --to-language TO LANGUAGE
+                         target language to translate. Defaults to "zh"
+  -p PROXY, --proxy PROXY
+                         set proxy server of the requests
+  -disable, --disable-cn
+                         disable local CN host. Defaults to use
+  -e, --ignore-empty     ignore the empty translate text. Defaults to not ignore
+  -l, --ignore-length    ignore the limited length of the text in one time of translation. Defaults to not
+                        ignore
+  -d, --set-duration     set translate duration. Defaults to not set the duration
+  -dt DURATION, --duration-time DURATION
+                         set the translate time. Defaults to set the duration 1 second
+
+ multi files options :
+   multi files translate
+
+  -D INPUT DIRECTORY [INPUT DIRECTORY ...], --directory INPUT DIRECTORY [INPUT DIRECTORY ...]
+
+```
