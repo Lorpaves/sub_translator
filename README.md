@@ -24,37 +24,6 @@ The translated file will be saved as SRT formats
 
 Available Server: Google, Alibaba, Yandex, Microsoft(Bing), Kingsoft(Iciba), Sogou, Lingvanex, Itranslate, Caiyun, Argos, Baidu, Tencent
 
-### Python 使用示例
-
-```python
-import pysubs2 as pysub
-import translators.server as tss
-import SubTranslator
-
-sub_ts = SubTranslator.SubTranslator(pysub=pysub, tss=tss)
-sub_ts.translate_sub(path='./test.srt', file_name = './save.srt',
-                     from_language='en', to_language='zh')
-
-```
-
-### Python 引用参数说明
-
-```python
-SubTranslator
-if_duration (bool: Default False) # if need to set translate duration, set this to True
-duration (int) # duration
-if_ignore_empty_query (bool: Default True) # if the text was empty, set True to ignore the text, else will throw error
-if_ignore_limit_of_length (bool: Default True)  # Default limited length is 1500, set to True to ignore the error
-if_use_cn_host (bool: Default True)  # use cn host or not
-server (str: Default "alibaba") # the server that send request to in order to translate the text
-
-SubTranslator.translate_sub
-path (string): #path of the subtitle file
-file_name (str): # the name used to save the translated subtitle file
-from_language (str): # original language
-to_language (str): # target language to translate
-```
-
 ### 命令行参数说明
 
 ```shell
@@ -97,6 +66,37 @@ options:
 ![ex2](./assets/ex2.gif)
 
 ![ex3](./assets/ex3.gif)
+
+### Python 使用示例
+
+```python
+import pysubs2 as pysub
+import translators.server as tss
+import SubTranslator
+
+sub_ts = SubTranslator.SubTranslator(pysub=pysub, tss=tss)
+sub_ts.translate_sub(path='./test.srt', file_name = './save.srt',
+                     from_language='en', to_language='zh')
+
+```
+
+### Python 引用参数说明
+
+```python
+SubTranslator
+if_duration (bool: Default False) # if need to set translate duration, set this to True
+duration (int) # duration
+if_ignore_empty_query (bool: Default True) # if the text was empty, set True to ignore the text, else will throw error
+if_ignore_limit_of_length (bool: Default True)  # Default limited length is 1500, set to True to ignore the error
+if_use_cn_host (bool: Default True)  # use cn host or not
+server (str: Default "alibaba") # the server that send request to in order to translate the text
+
+SubTranslator.translate_sub
+path (string): #path of the subtitle file
+file_name (str): # the name used to save the translated subtitle file
+from_language (str): # original language
+to_language (str): # target language to translate
+```
 
 ### 特别感谢
 
