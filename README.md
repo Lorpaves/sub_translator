@@ -95,11 +95,13 @@ options:
 ### 感谢
 
 - pysubs2: https://pypi.org/project/pysubs2/
+
   pysubs2 is a Python library for editing subtitle files.
   It's based on SubStation Alpha,the native format of Aegisub;
   it also supports
 
 - translator: https://pypi.org/project/translators/
+
   Translators is a library which aims to bring free, multiple, enjoyable translation to individuals
   and students in Python. It based on the translation interface of Google, Yandex, Microsoft(Bing),
   Baidu, Alibaba, Tencent, NetEase(Youdao), Sogou, Kingsoft(Iciba), Iflytek, Niutrans, Lingvanex,
