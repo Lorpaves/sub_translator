@@ -97,8 +97,7 @@ options:
 - pysubs2: https://pypi.org/project/pysubs2/
 
   pysubs2 is a Python library for editing subtitle files.
-  It's based on SubStation Alpha,the native format of Aegisub;
-  it also supports
+  It's based on SubStation Alpha,the native format of Aegisub
 
 - translator: https://pypi.org/project/translators/
 
