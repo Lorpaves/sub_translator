@@ -9,8 +9,8 @@
 # translate all subtitle files at the current directory
 ./sub-ts -D .
 
-# 翻译 file1 file2字幕 和当前目录下的所有字幕文件
-./sub-ts -i file1 file2 -D .
+# 翻译 file1 file2字幕 和当前目录下的所有字幕文件，如果文件名有空格，需要加引号
+./sub-ts -i file1 "test.srt" -D .
 
 # 翻译 file1 file2字幕 和c:\\dir1目录下的所有字幕文件 服务器为bing，使用CNip
 ./sub-ts -i file1 file2 -D c:\\dir1 --server bing --use-cn
