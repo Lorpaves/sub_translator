@@ -100,7 +100,6 @@ class SubTranslator:
         total = len(grouped_strings)
         servers = [
             'alibaba',
-            'bing',
             'google',
             'iciba',
             'caiyun',
