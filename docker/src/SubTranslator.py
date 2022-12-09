@@ -100,7 +100,6 @@ class SubTranslator:
         total = len(grouped_strings)
         servers = [
             'alibaba',
-            'bing',
             'google',
             'iciba',
             'caiyun',
@@ -146,11 +145,11 @@ class SubTranslator:
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.alibaba(query_text=single_string,
-                                                   from_language=from_language, to_language=to_language,
-                                                   if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                   if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                   if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            translated_string = self.__tss.translate_text(translator='alibaba', query_text=single_string,
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -175,11 +174,11 @@ class SubTranslator:
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.google(query_text=single_string,
-                                                  from_language=from_language, to_language=to_language,
-                                                  if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                  if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                  if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            translated_string = self.__tss.translate_text(translator='google', query_text=single_string,
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -204,11 +203,11 @@ class SubTranslator:
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.argos(query_text=single_string,
-                                                 from_language=from_language, to_language=to_language,
-                                                 if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                 if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                 if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            translated_string = self.__tss.translate_text(translator='argos', query_text=single_string,
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -233,11 +232,11 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.bing(query_text=single_string,
-                                                from_language=from_language, to_language=to_language,
-                                                if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            translated_string = self.__tss.translate_text(translator='bing', query_text=single_string,
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -262,11 +261,11 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.caiyun(query_text=single_string,
-                                                  from_language=from_language, to_language=to_language,
-                                                  if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                  if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                  if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            translated_string = self.__tss.translate_text(translator='caiyun', query_text=single_string,
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -291,11 +290,11 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.lingvanex(query_text=single_string,
-                                                     from_language=from_language, to_language=to_language,
-                                                     if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                     if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                     if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            translated_string = self.__tss.translate_text(translator='lingvanex', query_text=single_string,
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -320,11 +319,11 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.baidu(query_text=single_string,
-                                                 from_language=from_language, to_language=to_language,
-                                                 if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                 if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                 if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            translated_string = self.__tss.translate_text(translator='baidu', query_text=single_string,
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -349,11 +348,11 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.iciba(query_text=single_string,
-                                                 from_language=from_language, to_language=to_language,
-                                                 if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                 if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                 if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            translated_string = self.__tss.translate_text(translator='iciba', query_text=single_string,
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -378,11 +377,11 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.itranslate(query_text=single_string,
-                                                      from_language=from_language, to_language=to_language,
-                                                      if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                      if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                      if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            translated_string = self.__tss.translate_text(translator='itranslate', query_text=single_string,
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -407,11 +406,11 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.sogou(query_text=single_string,
-                                                 from_language=from_language, to_language=to_language,
-                                                 if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                 if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                 if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            translated_string = self.__tss.translate_text(translator='sogou', query_text=single_string,
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -436,11 +435,11 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.tencent(query_text=single_string,
-                                                   from_language=from_language, to_language=to_language,
-                                                   if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                   if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                   if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            translated_string = self.__tss.translate_text(translator='tencent', query_text=single_string,
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
