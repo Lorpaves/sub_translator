@@ -17,41 +17,129 @@ class Wrapper:
 
 \033[0m
                                              """)
-        self.argv_group_one = self.argv_parser.add_argument_group(
-            '\033[4;31m advanced options \033[0m', '\033[0;33m advanced options of the translation \033[0m')
-        self.argv_group_two = self.argv_parser.add_argument_group(
-            '\033[4;31m multi files options \033[0m', '\033[0;33m multi files translate \033[0m')
+        self.argv_group_one = self.argv_parser.add_argument_group("""
+\033[0;31m 
+advanced options \033[0m""", """
+\033[0;33m 
+advanced options of the translation 
+\033[0m
+""")
+        self.argv_group_two = self.argv_parser.add_argument_group("""
+\033[0;31m 
+multi files options \033[0m""", """
+
+\033[0;33m multi files translate \033[0m
+
+""")
 
         self.__parser()
         self.__wrapper()
 
     def __parser(self):
-
         self.argv_parser.add_argument('-i', '--input', dest='input file',
-                                      action='store', type=str, nargs='+', help='\033[0;32m the server that send request to translate the text \033[0m', default=None)
-        self.argv_parser.add_argument('-o', '--output', dest='output directory',
-                                      action='store', help='\033[0;32m the server that send request to translate the text \033[0m', default=None)
-        self.argv_group_two.add_argument('-D', '--directory', dest='input directory',
-                                         action='store', nargs='+', help='\033[0;32m the server that send request to translate the text \033[0m', default=None)
+                                      action='store', type=str, nargs='+', help="""
+\033[0;32m
 
-        self.argv_group_one.add_argument('-s', '--server', dest='server',
-                                         action='store', default='alibaba', help='\033[0;32m the server that send request to translate the text. Defaults to "alibaba" \033[0m')
+original file, ex: file1 file2 
+
+\033[0m
+
+""", default=None)
+
+        self.argv_group_two.add_argument('-D', '--directory', dest='input directory',
+                                         action='store', nargs='+', help="""
+                                         
+\033[0;32m 
+
+the server that send request to translate the text \033[0m
+
+""", default=None)
+
+        self.argv_group_one.add_argument('-S', '--server', dest='server',
+                                         action='store', default='random', help="""
+\033[0;32m 
+
+the server that send request to translate the text. Defaults to random 
+
+\033[0m
+
+""")
+        self.argv_group_one.add_argument('-s', '--switch-duration', dest='switch duration',
+                                         action='store', default=20, type=int, help="""
+\033[0;32m  
+
+the translation times before switching translation server. Defaults to 20  
+
+\033[0m
+
+
+
+""")
+
         self.argv_group_one.add_argument('-f', '--from-language', dest='from language',
-                                         action='store', default='en', help='\033[0;32m original language. Defaults to "en". \033[0m')
+                                         action='store', default='en', help="""
+\033[0;32m 
+
+original language. Defaults to "en". 
+
+\033[0m                                         
+""")
         self.argv_group_one.add_argument('-t', '--to-language', dest='to language',
-                                         action='store', default='zh', help='\033[0;32m target language to translate. Defaults to "zh" \033[0m')
+                                         action='store', default='zh', help="""
+\033[0;32m 
+
+target language to translate. Defaults to "zh" 
+
+\033[0m                                         
+""")
         self.argv_group_one.add_argument('-p', '--proxy', dest='proxy',
-                                         action='store', help='\033[0;32m set proxy server of the requests \033[0m', default=None, type=str)
+                                         action='store', help="""
+\033[0;32m 
+
+set proxy server of the requests \033[0m', default=
+
+None, type=st                                         
+""")
         self.argv_group_one.add_argument('-disable', '--disable-cn', dest='if use cn host',
-                                         action='store_false', default=True, help='\033[0;32m disable local CN host. Defaults to use \033[0m')
+                                         action='store_false', default=True, help="""
+\033[0;32m 
+
+disable local CN host. Defaults to use 
+
+\033[0m                                         
+""")
         self.argv_group_one.add_argument('-e', '--ignore-empty', dest='if ignore empty query',
-                                         action='store_true', default=False, help='\033[0;32m ignore the empty translate text. Defaults to not ignore \033[0m')
+                                         action='store_true', default=False, help="""
+\033[0;32m 
+
+ignore the empty translate text. Defaults to not ignore 
+
+\033[0m                                         
+""")
         self.argv_group_one.add_argument('-l', '--ignore-length', dest='if ignore limit of length',
-                                         action='store_true', default=False, help='\033[0;32m ignore the limited length of the text in one time of translation. Defaults to not ignore \033[0m')
+                                         action='store_true', default=False, help="""
+\033[0;32m 
+
+ignore the limited length of the text in one time of translation. Defaults to not ignore 
+
+\033[0m                                         
+""")
         self.argv_group_one.add_argument('-d', '--set-duration', dest='if duration',
-                                         action='store_true', default=False, help='\033[0;32m set translate duration. Defaults to not set the duration \033[0m')
+                                         action='store_true', default=False, help="""
+\033[0;32m 
+
+set translate duration. Defaults to not set the duration 
+
+\033[0m                                         
+""")
         self.argv_group_one.add_argument('-dt', '--duration-time', dest='duration',
-                                         action='store', default=1, type=int, help='\033[0;32m set the translate time. Defaults to set the duration 1 second \033[0m')
+                                         action='store', default=1, type=int, help="""
+\033[0;32m 
+
+set the translate time. Defaults to set the duration 1 second 
+
+\033[0m                                         
+""")
         self.argv_parser.parse_args(
             args=self.__argv, namespace=self)
 

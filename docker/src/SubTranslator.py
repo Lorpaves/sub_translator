@@ -1,4 +1,5 @@
 import time
+import random
 """Doc
 
 Thanks to <pysubs2> and <translator> let this tool make sense
@@ -57,7 +58,7 @@ class SubTranslator:
         self.__if_ignore_limit_of_length = kwargs.get(
             'if_ignore_limit_of_length', False)
         self.__if_use_cn_host = kwargs.get('if_use_cn_host', False)
-        self.__server = kwargs.get('server', 'alibaba')
+        self.__server = kwargs.get('server', 'random')
         self.__proxy = kwargs.get('proxy', None)
 
     def __get_proxy(self):
@@ -85,15 +86,43 @@ class SubTranslator:
         event = ''
         for index, single_event in enumerate(single_events):
             length += len(single_event)
-            if length < 1500:
+            if length < 4500:
                 event += single_event + '\n\n'
-            if length < 1500 and index == len(single_events) - 1:
+            if length < 4500 and index == len(single_events) - 1:
                 grouped_strings.append(event)
-            if length >= 1500:
+            if length >= 4500:
                 grouped_strings.append(event)
                 length = 0
                 event = single_event + '\n\n'
         return grouped_strings
+
+    def __translate_random(self, grouped_strings, from_language: str, to_language: str, switch_duration: int = 20):
+        total = len(grouped_strings)
+        servers = self.__tss.translators_pool
+        translated_subs = []
+        server_index = 0
+        duration = switch_duration
+        for index, single_string in enumerate(grouped_strings):
+            if (self.__if_duration):
+                time.sleep(self.__duration)
+            if duration < 0:
+                server_index = random.randrange(0, len(servers))
+                duration = switch_duration
+            translated_string = self.__tss.translate_text(query_text=single_string,
+                                                          translator=servers[server_index],
+                                                          from_language=from_language, to_language=to_language,
+                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
+                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
+                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            switch_duration -= 1
+
+            translated_subs.append(translated_string)
+            print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
+                origin_line=single_string, translated_string=translated_string))
+            print('Current:\033[0;33m {index} \033[0m || \033[0;34m {total} \033[0m' .format(
+                index=index + 1, total=total))
+
+        return translated_subs
 
     def __translate_alibaba(self, grouped_strings, from_language: str, to_language: str):
         """_summary_
@@ -428,7 +457,7 @@ w
         sub.save(file_name)
         print('\033[4;31m File Saved at {name}\033[0m'.format(name=file_name))
 
-    def translate_sub(self, path: str, file_name: str, from_language: str = 'en', to_language: str = 'zh'):
+    def translate_sub(self, path: str, file_name: str, from_language: str = 'en', to_language: str = 'zh', **kwargs):
         """_summary_
 
         Args:
@@ -437,6 +466,7 @@ w
             from_language (str, optional): original language. Defaults to 'en'.
             to_language (str, optional): target language to translate. Defaults to 'zh'.
         """
+
         if self.__server == 'alibaba':
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
@@ -504,4 +534,11 @@ w
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_tencent(
                 grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+            self.__write_sub(sub_string=translated_sub, file_name=file_name)
+        elif self.__server == 'random':
+            switch_duration = kwargs.get('switch_duration', 20)
+            sub_event = self.__get_sub(path=path)
+            grouped_string = self.__format_sub(sub_event=sub_event)
+            translated_sub = self.__translate_random(
+                grouped_strings=grouped_string, from_language=from_language, to_language=to_language, switch_duration=switch_duration)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
