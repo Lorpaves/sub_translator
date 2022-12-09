@@ -1,6 +1,6 @@
 # 字幕翻译工具
 
-[Get the tool](https://github.com/Lorpaves/sub_translator/releases/tag/v1.1.0)
+[Get the tool](https://github.com/Lorpaves/sub_translator/releases)
 
 ### 命令行工具使用说明
 
