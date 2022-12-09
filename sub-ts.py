@@ -100,11 +100,11 @@ set proxy server of the requests \033[0m', default=
 
 None, type=st                                         
 """)
-        self.argv_group_one.add_argument('-disable', '--disable-cn', dest='if use cn host',
-                                         action='store_false', default=True, help="""
+        self.argv_group_one.add_argument('-uc', '--use-cn', dest='if use cn host',
+                                         action='store_true', default=False, help="""
 \033[0;32m 
 
-disable local CN host. Defaults to use 
+choose to use local CN host. Defaults to not use 
 
 \033[0m                                         
 """)
