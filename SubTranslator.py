@@ -101,20 +101,12 @@ class SubTranslator:
         servers = [
             'alibaba',
             'argos',
-            'baidu',
             'bing',
             'google',
             'iciba',
-            'iflytek',
+            'caiyun',
             'lingvanex',
-            'mglip',
-            'papago',
-            'reverso',
-            'sogou',
-            'tencent',
-            'translateCom',
-            'utibet',
-            'yandex'
+            'reverso'
         ]
         translated_subs = []
         server_index = random.randrange(0, len(servers))

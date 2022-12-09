@@ -105,16 +105,10 @@ class SubTranslator:
             'bing',
             'google',
             'iciba',
-            'iflytek',
+            'caiyun',
             'lingvanex',
-            'mglip',
-            'papago',
             'reverso',
-            'sogou',
             'tencent',
-            'translateCom',
-            'utibet',
-            'yandex'
         ]
         translated_subs = []
         server_index = random.randrange(0, len(servers))
