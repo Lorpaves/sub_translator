@@ -1,5 +1,7 @@
 # 字幕翻译工具
 
+Get the tool(Downloads)[https://github.com/Lorpaves/sub_translator/releases/tag/v1.1.0]
+
 ### 命令行工具使用说明
 
 ```shell
@@ -10,8 +12,8 @@
 # 翻译 file1 file2字幕 和当前目录下的所有字幕文件
 ./sub-ts -i file1 file2 -D .
 
-#
-./sub-ts -i -D c:\\dir1 -S
+# 翻译 file1 file2字幕 和c:\\dir1目录下的所有字幕文件 服务器为bing，使用CNip
+./sub-ts -i file1 file2 -D c:\\dir1 --server bing --use-cn
 ```
 
 ### 命令行参数说明
