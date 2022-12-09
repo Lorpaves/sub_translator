@@ -14,6 +14,10 @@
 
 # 翻译 file1 file2字幕 和c:\\dir1目录下的所有字幕文件 服务器为bing，使用CNip
 ./sub-ts -i file1 file2 -D c:\\dir1 --server bing --use-cn
+
+# 推荐使用 ⬇️
+# 每翻译10次换一次服务器，设置翻译延迟为4s
+./sub-ts -s 10 -i file1 file2 -d -dt 4
 ```
 
 ### 命令行参数说明
