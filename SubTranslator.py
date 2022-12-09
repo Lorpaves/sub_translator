@@ -100,14 +100,11 @@ class SubTranslator:
         total = len(grouped_strings)
         servers = [
             'alibaba',
-            'argos',
             'bing',
             'google',
             'iciba',
             'caiyun',
-            'lingvanex',
-            'reverso'
-        ]
+            'lingvanex']
         translated_subs = []
         server_index = random.randrange(0, len(servers))
         duration = switch_duration
