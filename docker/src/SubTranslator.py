@@ -98,9 +98,26 @@ class SubTranslator:
 
     def __translate_random(self, grouped_strings, from_language: str, to_language: str, switch_duration: int = 20):
         total = len(grouped_strings)
-        servers = self.__tss.translators_pool
+        servers = [
+            'alibaba',
+            'argos',
+            'baidu',
+            'bing',
+            'google',
+            'iciba',
+            'iflytek',
+            'lingvanex',
+            'mglip',
+            'papago',
+            'reverso',
+            'sogou',
+            'tencent',
+            'translateCom',
+            'utibet',
+            'yandex'
+        ]
         translated_subs = []
-        server_index = 0
+        server_index = random.randrange(0, len(servers))
         duration = switch_duration
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
@@ -114,7 +131,7 @@ class SubTranslator:
                                                           if_ignore_empty_query=self.__if_ignore_empty_query,
                                                           if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
                                                           if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
-            switch_duration -= 1
+            duration -= 1
 
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
