@@ -9,3 +9,4 @@ cli.py
 .ipynb_checkpoints/
 build/
 sub-ts.spec
+test.py
