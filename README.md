@@ -60,10 +60,6 @@ advanced options :
   -t TO LANGUAGE, --to-language TO LANGUAGE
                          target language to translate. Defaults to "zh"
 
-  # 设置代理服务器，默认无代理，如要设置，则在命令行末尾加入 [-p 127.0.0.1:8888]
-  -p PROXY, --proxy PROXY
-                         set proxy server of the requests
-
   # 使用CN服务器，如果在国内，需要在选项中加入这个，不使用代理的话，无法访问谷歌翻译服务，则将翻译服务切换为其它
   -uc, --use-cn
                          choose to use local CN host. Defaults to not use
