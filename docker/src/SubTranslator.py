@@ -53,18 +53,8 @@ class SubTranslator:
         self.__tss = tss
         self.__if_duration = kwargs.get('if_duration', False)
         self.__duration = kwargs.get('duration', 1)
-        self.__if_ignore_empty_query = kwargs.get(
-            'if_ignore_empty_query', False)
-        self.__if_ignore_limit_of_length = kwargs.get(
-            'if_ignore_limit_of_length', False)
-        self.__if_use_cn_host = kwargs.get('if_use_cn_host', False)
         self.__server = kwargs.get('server', 'random')
-        self.__proxy = kwargs.get('proxy', None)
-
-    def __get_proxy(self):
-        if self.__proxy != None:
-            return {'http': f'http://{self.__proxy}', 'https': f'https://{self.__proxy}'}
-        return None
+        self.__kwargs = kwargs
 
     def __get_sub(self, path):
         """_summary_
@@ -96,14 +86,8 @@ class SubTranslator:
                 event = single_event + '\n\n'
         return grouped_strings
 
-    def __translate_random(self, grouped_strings, from_language: str, to_language: str, switch_duration: int = 20):
+    def __translate(self, grouped_strings, from_language: str, to_language: str, switch_duration: int = 20, servers: list = []):
         total = len(grouped_strings)
-        servers = [
-            'alibaba',
-            'google',
-            'iciba',
-            'caiyun',
-            'lingvanex']
         translated_subs = []
         server_index = random.randrange(0, len(servers))
         duration = switch_duration
@@ -113,12 +97,16 @@ class SubTranslator:
             if duration < 0:
                 server_index = random.randrange(0, len(servers))
                 duration = switch_duration
-            translated_string = self.__tss.translate_text(query_text=single_string,
-                                                          translator=servers[server_index],
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(query_text=single_string,
+                                                              translator=servers[server_index],
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             duration -= 1
 
             translated_subs.append(translated_string)
@@ -128,6 +116,20 @@ class SubTranslator:
                 index=index + 1, total=total))
 
         return translated_subs
+
+    def __translate_random(self, grouped_strings, from_language: str, to_language: str, switch_duration: int = 20):
+        servers = [
+            'alibaba',
+            'google',
+            'iciba',
+            'caiyun',
+            'lingvanex']
+        return self.__translate(grouped_strings, from_language=from_language, to_language=to_language, switch_duration=switch_duration, servers=servers)
+
+    def __translate_random_custom(self, grouped_strings, from_language: str, to_language: str, switch_duration: int = 20):
+        servers = self.__kwargs.get('servers', None)
+        if servers:
+            return self.__translate(grouped_strings, from_language=from_language, to_language=to_language, switch_duration=switch_duration, servers=servers)
 
     def __translate_alibaba(self, grouped_strings, from_language: str, to_language: str):
         """_summary_
@@ -145,11 +147,15 @@ class SubTranslator:
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.translate_text(translator='alibaba', query_text=single_string,
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(translator='alibaba', query_text=single_string,
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -174,11 +180,15 @@ class SubTranslator:
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.translate_text(translator='google', query_text=single_string,
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(translator='google', query_text=single_string,
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -203,11 +213,15 @@ class SubTranslator:
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.translate_text(translator='argos', query_text=single_string,
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(translator='argos', query_text=single_string,
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -232,11 +246,15 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.translate_text(translator='bing', query_text=single_string,
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(translator='bing', query_text=single_string,
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -261,11 +279,15 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.translate_text(translator='caiyun', query_text=single_string,
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(translator='caiyun', query_text=single_string,
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -290,11 +312,15 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.translate_text(translator='lingvanex', query_text=single_string,
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(translator='lingvanex', query_text=single_string,
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -319,11 +345,15 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.translate_text(translator='baidu', query_text=single_string,
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(translator='baidu', query_text=single_string,
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -348,11 +378,15 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.translate_text(translator='iciba', query_text=single_string,
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(translator='iciba', query_text=single_string,
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -377,11 +411,15 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.translate_text(translator='itranslate', query_text=single_string,
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(translator='itranslate', query_text=single_string,
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -406,11 +444,15 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.translate_text(translator='sogou', query_text=single_string,
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(translator='sogou', query_text=single_string,
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -435,11 +477,15 @@ w
         for index, single_string in enumerate(grouped_strings):
             if (self.__if_duration):
                 time.sleep(self.__duration)
-            translated_string = self.__tss.translate_text(translator='tencent', query_text=single_string,
-                                                          from_language=from_language, to_language=to_language,
-                                                          if_ignore_empty_query=self.__if_ignore_empty_query,
-                                                          if_ignore_limit_of_length=self.__if_ignore_limit_of_length,
-                                                          if_use_cn_host=self.__if_use_cn_host, proxies=self.__get_proxy())
+            try:
+                translated_string = self.__tss.translate_text(translator='tencent', query_text=single_string,
+                                                              **self.__kwargs)
+            except self.__tss.TranslatorError:
+                raise RuntimeError("""\033[0;33m 服务器请求失败😵‍💫，可能因为频繁请求而导致请求受阻，建议增长请求延迟。设置每次翻译后的停顿时间。
+如果是使用国内的翻译服务器，使用cn host。
+                
+Failed to translate, make sure you set the translation duration time if you get this message.\033[0m
+""")
             translated_subs.append(translated_string)
             print('\033[0;31m{origin_line}\033[0m \n=>\n \033[0;32m{translated_string}\033[0m'.format(
                 origin_line=single_string, translated_string=translated_string))
@@ -541,9 +587,16 @@ w
                 grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'random':
-            switch_duration = kwargs.get('switch_duration', 20)
+            switch_duration = kwargs.get('switch_duration', 10)
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_random(
+                grouped_strings=grouped_string, from_language=from_language, to_language=to_language, switch_duration=switch_duration)
+            self.__write_sub(sub_string=translated_sub, file_name=file_name)
+        elif self.__server == 'custom':
+            switch_duration = kwargs.get('switch_duration', 10)
+            sub_event = self.__get_sub(path=path)
+            grouped_string = self.__format_sub(sub_event=sub_event)
+            translated_sub = self.__translate_random_custom(
                 grouped_strings=grouped_string, from_language=from_language, to_language=to_language, switch_duration=switch_duration)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)

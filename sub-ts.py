@@ -5,6 +5,7 @@ import SubTranslator
 import argparse
 import sys
 import re
+import yaml
 
 
 class Wrapper:
@@ -51,7 +52,7 @@ original file, ex: file1 file2
                                          
 \033[0;32m 
 
-the server that send request to translate the text \033[0m
+the directory that contains the subtitle files which need to be translated \033[0m
 
 """, default=None)
 
@@ -65,10 +66,10 @@ the server that send request to translate the text. Defaults to random
 
 """)
         self.argv_group_one.add_argument('-s', '--switch-duration', dest='switch duration',
-                                         action='store', default=20, type=int, help="""
+                                         action='store', default=10, type=int, help="""
 \033[0;32m  
 
-the translation times before switching translation server. Defaults to 20  
+the translation times before switching translation server. Defaults to 10  
 
 \033[0m
 
@@ -92,14 +93,7 @@ target language to translate. Defaults to "zh"
 
 \033[0m                                         
 """)
-        self.argv_group_one.add_argument('-p', '--proxy', dest='proxy',
-                                         action='store', help="""
-\033[0;32m 
 
-set proxy server of the requests \033[0m', default=
-
-None, type=st                                         
-""")
         self.argv_group_one.add_argument('-uc', '--use-cn', dest='if use cn host',
                                          action='store_true', default=False, help="""
 \033[0;32m 
@@ -137,6 +131,14 @@ set translate duration. Defaults to not set the duration
 \033[0;32m 
 
 set the translate time. Defaults to set the duration 1 second 
+
+\033[0m                                         
+""")
+        self.argv_group_one.add_argument('-c', '--config', dest='config file',
+                                         action='store', default='config.yaml', type=str, help="""
+\033[0;32m 
+
+the config file path
 
 \033[0m                                         
 """)
@@ -201,10 +203,25 @@ class utils:
             sub_ts(path=file, file_name=translated_file[index],
                    from_language=from_language, to_language=to_language)
 
+    @staticmethod
+    def config_parser(**kwargs):
+        config_path = kwargs.get('config_file')
+        try:
+            with open(config_path) as cfg:
+                config = yaml.safe_load(cfg)
+            return config
+        except FileNotFoundError as err:
+            print(err)
+            raise FileExistsError(
+                'File not found, make sure you have the config file [\033[0;33m config.yaml \033[0m]')
+
 
 def main():
     a = Wrapper()
     kwargs = a.namespace
+    config = utils.config_parser(**kwargs)
+    kwargs = {**kwargs, **config}
+
     sub = SubTranslator.SubTranslator(pysub=pysub, tss=tss, **kwargs)
     sub_ts = sub.translate_sub
     files = utils.get_files(files_array=kwargs.get(
