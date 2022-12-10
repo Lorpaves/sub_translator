@@ -131,7 +131,7 @@ show_time_stat_precision: 4
 
 # str, default 'B2C'.
 lingvanex_model: 'B2C'
-# if choose to use random servers set this
+# if choose to use custom server set this
 # servers:
 #   -
 #   -
