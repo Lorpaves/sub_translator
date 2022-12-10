@@ -80,6 +80,65 @@ advanced options :
 
 ```
 
+### config 文件说明
+
+```yaml
+# 显示翻译的细节，比如是名词或动词等。。
+# show detail result
+is_detail_result: False
+
+# 专业领域翻译，只有 阿里巴巴、百度、caiyun才支持
+# professional_field:  str
+# support baidu(), caiyun(), alibaba() only.
+# alibaba "general","message","offer"
+# baidu 'common','medicine','electronics','mechanics'
+# caiyun None,"medicine","law","machinery"
+
+# float default None.
+timeout:
+
+# str, default None.
+proxies:
+
+# float, default 1500.
+update_session_after_seconds: 1500
+
+# float, default random.random()
+#sleep_seconds:
+
+# bool, default False.
+if_use_cn_host: false
+
+# str, default None.
+reset_host_url:
+
+# boolean, default False.
+if_ignore_empty_query: false
+
+# boolean, default False.
+if_ignore_limit_of_length: false
+
+# 不要修改这个
+# don't set this, is pre-defined in the tool.
+# change this will break the tool
+limit_of_length: 5000
+
+# boolean, default False.
+if_show_time_stat: false
+
+# int, default 4.
+show_time_stat_precision: 4
+
+# str, default 'B2C'.
+lingvanex_model: 'B2C'
+# if choose to use random servers set this
+# servers:
+#   -
+#   -
+#   -
+#   -
+```
+
 ### 说明
 
 支持的字幕格式: SubRip (SRT), MicroDVD(microdvd), WebVTT formats(vtt),Advanced SubStation Alpha v4.0+(ass),SubStation Alpha v4.0(ssa)
