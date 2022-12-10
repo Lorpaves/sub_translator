@@ -49,7 +49,7 @@ advanced options :
   -S SERVER, --server SERVER
                          the server that send request to translate the text. Defaults to "alibaba"
 
-  # 翻译多少次后切换翻译服务器，默认为20次，只有在翻译服务器为random的时候才生效。
+  # 翻译多少次后切换翻译服务器，默认为20次，只有在翻译服务器为random或custom的时候才生效。
   -s SWITCH DURATION, --switch-duration SWITCH DURATION
                          the translation times before switching translation server. Defaults to 20
   # 默认为英文:en，可选，支持的语言参考：https://pypi.org/project/translators/
