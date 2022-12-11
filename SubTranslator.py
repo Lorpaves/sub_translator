@@ -86,7 +86,7 @@ class SubTranslator:
                 event = '\n\n' + single_event + '\n\n'
         return grouped_strings
 
-    def __translate(self, grouped_strings, from_language: str, to_language: str, switch_duration: int = 20, servers: list = []):
+    def __translate(self, grouped_strings, switch_duration: int = 20, servers: list = []):
         total = len(grouped_strings)
         translated_subs = []
         server_index = random.randrange(0, len(servers))
@@ -117,21 +117,21 @@ Failed to translate, make sure you set the translation duration time if you get 
 
         return translated_subs
 
-    def __translate_random(self, grouped_strings, from_language: str, to_language: str, switch_duration: int = 20):
+    def __translate_random(self, grouped_strings, switch_duration: int = 20):
         servers = [
             'alibaba',
             'google',
             'iciba',
             'caiyun',
             'lingvanex']
-        return self.__translate(grouped_strings, from_language=from_language, to_language=to_language, switch_duration=switch_duration, servers=servers)
+        return self.__translate(grouped_strings, switch_duration=switch_duration, servers=servers)
 
-    def __translate_random_custom(self, grouped_strings, from_language: str, to_language: str, switch_duration: int = 20):
+    def __translate_random_custom(self, grouped_strings, switch_duration: int = 20):
         servers = self.__kwargs.get('servers', None)
         if servers:
-            return self.__translate(grouped_strings, from_language=from_language, to_language=to_language, switch_duration=switch_duration, servers=servers)
+            return self.__translate(grouped_strings, switch_duration=switch_duration, servers=servers)
 
-    def __translate_alibaba(self, grouped_strings, from_language: str, to_language: str):
+    def __translate_alibaba(self, grouped_strings):
         """_summary_
 
         Args:
@@ -164,7 +164,7 @@ Failed to translate, make sure you set the translation duration time if you get 
 
         return translated_subs
 
-    def __translate_google(self, grouped_strings, from_language: str, to_language: str):
+    def __translate_google(self, grouped_strings):
         """_summary_
 
         Args:
@@ -197,7 +197,7 @@ Failed to translate, make sure you set the translation duration time if you get 
 
         return translated_subs
 
-    def __translate_argos(self, grouped_strings, from_language: str, to_language: str):
+    def __translate_argos(self, grouped_strings):
         """_summary_
 
         Args:
@@ -230,7 +230,7 @@ Failed to translate, make sure you set the translation duration time if you get 
 
         return translated_subs
 
-    def __translate_bing(self, grouped_strings, from_language: str, to_language: str):
+    def __translate_bing(self, grouped_strings):
         """_summary_
 w
         Args:
@@ -263,7 +263,7 @@ Failed to translate, make sure you set the translation duration time if you get 
 
         return translated_subs
 
-    def __translate_caiyun(self, grouped_strings, from_language: str, to_language: str):
+    def __translate_caiyun(self, grouped_strings):
         """_summary_
 
         Args:
@@ -296,7 +296,7 @@ Failed to translate, make sure you set the translation duration time if you get 
 
         return translated_subs
 
-    def __translate_lingvanex(self, grouped_strings, from_language: str, to_language: str):
+    def __translate_lingvanex(self, grouped_strings):
         """_summary_
 
         Args:
@@ -329,7 +329,7 @@ Failed to translate, make sure you set the translation duration time if you get 
 
         return translated_subs
 
-    def __translate_baidu(self, grouped_strings, from_language: str, to_language: str):
+    def __translate_baidu(self, grouped_strings):
         """_summary_
 
         Args:
@@ -362,7 +362,7 @@ Failed to translate, make sure you set the translation duration time if you get 
 
         return translated_subs
 
-    def __translate_iciba(self, grouped_strings, from_language: str, to_language: str):
+    def __translate_iciba(self, grouped_strings):
         """_summary_
 
         Args:
@@ -395,7 +395,7 @@ Failed to translate, make sure you set the translation duration time if you get 
 
         return translated_subs
 
-    def __translate_itranslate(self, grouped_strings, from_language: str, to_language: str):
+    def __translate_itranslate(self, grouped_strings):
         """_summary_
 
         Args:
@@ -428,7 +428,7 @@ Failed to translate, make sure you set the translation duration time if you get 
 
         return translated_subs
 
-    def __translate_sogou(self, grouped_strings, from_language: str, to_language: str):
+    def __translate_sogou(self, grouped_strings):
         """_summary_
 
         Args:
@@ -461,7 +461,7 @@ Failed to translate, make sure you set the translation duration time if you get 
 
         return translated_subs
 
-    def __translate_tencent(self, grouped_strings, from_language: str, to_language: str):
+    def __translate_tencent(self, grouped_strings):
         """_summary_
 
         Args:
@@ -508,7 +508,7 @@ Failed to translate, make sure you set the translation duration time if you get 
         sub.save(file_name)
         print('\033[4;31m File Saved at {name}\033[0m'.format(name=file_name))
 
-    def translate_sub(self, path: str, file_name: str, from_language: str = 'en', to_language: str = 'zh', **kwargs):
+    def translate_sub(self, path: str, file_name: str, **kwargs):
         """_summary_
 
         Args:
@@ -522,81 +522,81 @@ Failed to translate, make sure you set the translation duration time if you get 
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_alibaba(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+                grouped_strings=grouped_string)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'google':
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_google(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+                grouped_strings=grouped_string)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'bing':
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_bing(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+                grouped_strings=grouped_string)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
 
         elif self.__server == 'baidu':
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_baidu(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+                grouped_strings=grouped_string)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
 
         elif self.__server == 'caiyun':
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_caiyun(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+                grouped_strings=grouped_string)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'lingvanex':
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_lingvanex(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+                grouped_strings=grouped_string)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'argos':
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_argos(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+                grouped_strings=grouped_string)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'iciba':
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_iciba(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+                grouped_strings=grouped_string)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'itranslate':
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_itranslate(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+                grouped_strings=grouped_string)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'sogou':
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_sogou(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+                grouped_strings=grouped_string)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'tencent':
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_tencent(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language)
+                grouped_strings=grouped_string)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'random':
-            switch_duration = kwargs.get('switch_duration', 10)
+            switch_duration = self.__kwargs.get('switch_duration', 10)
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_random(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language, switch_duration=switch_duration)
+                grouped_strings=grouped_string, switch_duration=switch_duration)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)
         elif self.__server == 'custom':
-            switch_duration = kwargs.get('switch_duration', 10)
+            switch_duration = self.__kwargs.get('switch_duration', 10)
             sub_event = self.__get_sub(path=path)
             grouped_string = self.__format_sub(sub_event=sub_event)
             translated_sub = self.__translate_random_custom(
-                grouped_strings=grouped_string, from_language=from_language, to_language=to_language, switch_duration=switch_duration)
+                grouped_strings=grouped_string, switch_duration=switch_duration)
             self.__write_sub(sub_string=translated_sub, file_name=file_name)

@@ -1,5 +1,5 @@
 #!/bin/zsh
-#pyinstaller --onefile --nowindow -p . sub-ts.py
+pyinstaller --onefile --nowindow -p . sub-ts.py
 cd dist
 rm sub-ts-macos.zip && zip sub-ts-macos.zip sub-ts config.yaml
 cd ..

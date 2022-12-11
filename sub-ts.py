@@ -197,11 +197,8 @@ class utils:
 
     @staticmethod
     def translate_files(original_file: list, translated_file: list, sub_ts, **kwargs):
-        from_language = kwargs.get('from_language', 'en')
-        to_language = kwargs.get('to_language', 'zh')
         for index, file in enumerate(original_file):
-            sub_ts(path=file, file_name=translated_file[index],
-                   from_language=from_language, to_language=to_language)
+            sub_ts(path=file, file_name=translated_file[index], **kwargs)
 
     @staticmethod
     def config_parser(**kwargs):
