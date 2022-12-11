@@ -43,7 +43,7 @@ advanced options :
   # 翻译服务，默认为random，最好不要选择特定的翻译服务器，否则翻译请求会被阻止。
   # random就是在规定次数内切换翻译服务器，防止被阻止请求而中断翻译。
   # random, custom, google, alibaba, yandex, Microsoft(bing), Kingsoft(iciba), sogou, lingvanex, itranslate, caiyun, argos, baidu, tencent
-  # random: can't choose which server to use. is pre-defined to use the following servers: alibaba, google, iciba, caiyun, lingvanex
+  # random: can't choose which server to use. is pre-defined to use the following servers: alibaba, google, iciba, lingvanex
   # custom: can choose which server to use. if choose custom, the config file must have specify the servers. Supported servers:  Google, Alibaba, Yandex, Microsoft(Bing), Kingsoft(Iciba), Sogou, Lingvanex, Itranslate, Caiyun, Argos, Baidu, Tencent Available Server: Google, Alibaba, Yandex, Microsoft(Bing), Kingsoft(Iciba), Sogou, Lingvanex, Itranslate, Caiyun, Argos, Baidu, Tencent
   # custom can have multi servers in a list, the tool will randomly choose a server then send request to the server to translate after the task was done. One task is that translate how many times to switch the server, which can specify in the --switch-duration option
   -S SERVER, --server SERVER

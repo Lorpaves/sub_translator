@@ -127,7 +127,7 @@ set translate duration. Defaults to not set the duration
 \033[0m                                         
 """)
         self.argv_group_one.add_argument('-dt', '--duration-time', dest='duration',
-                                         action='store', default=1, type=int, help="""
+                                         action='store', default=1, type=float, help="""
 \033[0;32m 
 
 set the translate time. Defaults to set the duration 1 second 

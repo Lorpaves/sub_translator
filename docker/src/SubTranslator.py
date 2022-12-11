@@ -501,7 +501,7 @@ Failed to translate, make sure you set the translation duration time if you get 
             file_name (str): the name used to save the translated subtitle file
         """
 
-        sub_string = ''.join(sub_string).replace(
+        sub_string = '\n'.join(sub_string).replace(
             '-> ', ' --> ').replace('：', ':').replace('-&gt;', ' -->').replace('，', ',')
         sub = self.__pysub.SSAFile.from_string(sub_string, 'srt')
         sub.save(file_name)
