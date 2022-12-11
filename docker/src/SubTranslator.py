@@ -122,7 +122,6 @@ Failed to translate, make sure you set the translation duration time if you get 
             'alibaba',
             'google',
             'iciba',
-            'caiyun',
             'lingvanex']
         return self.__translate(grouped_strings, switch_duration=switch_duration, servers=servers)
 
