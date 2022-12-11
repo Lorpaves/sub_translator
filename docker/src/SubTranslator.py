@@ -83,7 +83,7 @@ class SubTranslator:
             if length >= 4500:
                 grouped_strings.append(event)
                 length = 0
-                event = single_event + '\n\n'
+                event = '\n\n' + single_event + '\n\n'
         return grouped_strings
 
     def __translate(self, grouped_strings, from_language: str, to_language: str, switch_duration: int = 20, servers: list = []):
