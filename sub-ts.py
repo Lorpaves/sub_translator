@@ -135,7 +135,7 @@ set the translate time. Defaults to set the duration 1 second
 \033[0m                                         
 """)
         self.argv_group_one.add_argument('-c', '--config', dest='config file',
-                                         action='store', default='config.yaml', type=str, help="""
+                                         action='store', default='.sub.yaml', type=str, help="""
 \033[0;32m 
 
 the config file path
@@ -203,14 +203,26 @@ class utils:
     @staticmethod
     def config_parser(**kwargs):
         config_path = kwargs.get('config_file')
+
         try:
             with open(config_path) as cfg:
                 config = yaml.safe_load(cfg)
             return config
         except FileNotFoundError as err:
-            print(err)
-            raise FileExistsError(
-                'File not found, make sure you have the config file [\033[0;33m config.yaml \033[0m]')
+            try:
+                if os.name == 'posix':
+                    home_dir = os.environ['HOME']
+                    config_path = f'{home_dir}/.sub-ts/.sub.yaml'
+                    with open(config_path) as cfg:
+                        config = yaml.safe_load(cfg)
+                    return config
+            except FileNotFoundError as err:
+                if os.name == 'posix':
+                    raise FileExistsError(
+                        'File not found, make sure you have the config file [\033[0;33m  ~/.sub-ts/.sub.yaml or at the current directory ./.sub.yaml \033[0m]')
+                else:
+                    raise FileExistsError(
+                        'File not found, make sure you have the config file [\033[0;33m at the current directory ./.sub.yaml \033[0m]')
 
 
 def main():

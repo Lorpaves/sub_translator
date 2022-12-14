@@ -1,0 +1,50 @@
+is_detail_result: False
+
+# professional_field:  str
+# support baidu(), caiyun(), alibaba() only.
+# alibaba "general","message","offer"
+# baidu 'common','medicine','electronics','mechanics'
+# caiyun None,"medicine","law","machinery"
+
+# float default None.
+timeout:
+
+# str, default None.
+proxies:
+
+# float, default 1500.
+update_session_after_seconds: 1500
+
+# float, default random.random()
+#sleep_seconds:
+
+# bool, default False.
+if_use_cn_host: false
+
+# str, default None.
+reset_host_url:
+
+# boolean, default False.
+if_ignore_empty_query: false
+
+# boolean, default False.
+if_ignore_limit_of_length: false
+
+# int, default 5000.
+limit_of_length: 5000
+
+# boolean, default False.
+
+if_show_time_stat: false
+
+# int, default 4.
+show_time_stat_precision: 4
+
+# str, default 'B2C'.
+lingvanex_model: 'B2C'
+# if choose to use custom server set this
+# servers:
+#   -
+#   -
+#   -
+#   -
